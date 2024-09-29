@@ -1,0 +1,7 @@
+<div class="hand">
+@for (card of this.Game.Hand; track card) {
+  <div class="card" (click)="onCardClicked(card)" [class.selected]="card.selected">
+    {{card.GetName()}}
+  </div>
+}
+</div>

@@ -1,0 +1,18 @@
+.hand {
+  display: flex;
+  gap: 1px;
+}
+
+.card {
+  width: 5rem;
+  height: 10rem;
+  border: black solid 1px;
+  border-radius: 10%;
+  align-content: center;
+  text-align: center;
+
+  &.selected {
+    transform: translateY(-5px);
+    border-color: red;
+  }
+}
