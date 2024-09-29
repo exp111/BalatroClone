@@ -4,13 +4,11 @@ export enum Suit {
   Club,
   Diamond,
   Spade,
-  Heart,
-  END
+  Heart
 }
 
 export enum Value {
-  One = 1,
-  Two,
+  Two = 2,
   Three,
   Four,
   Five,
@@ -22,8 +20,7 @@ export enum Value {
   Jack,
   Queen,
   King,
-  Ace,
-  END
+  Ace
 }
 
 export class Card {
@@ -49,6 +46,19 @@ export class Card {
         return enumToName(Value, this.value);
       default:
         return this.value.toString();
+    }
+  }
+
+  GetScore() {
+    switch (this.value) {
+      case Value.Jack:
+      case Value.Queen:
+      case Value.King:
+        return 10;
+      case Value.Ace:
+        return 11;
+      default:
+        return this.value as number;
     }
   }
 

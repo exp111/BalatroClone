@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {GameService} from "../game.service";
 
 @Component({
   selector: 'app-info',
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './info.component.css'
 })
 export class InfoComponent {
+  Game = inject(GameService);
+
   constructor() {
     (window as any).info = this;
   }
