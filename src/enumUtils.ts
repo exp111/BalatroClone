@@ -17,7 +17,7 @@ export function enumToNumberArray(enums: Enums) {
 }
 
 export function getLowestEnumValue(enums: Enums) {
-  let lowest = 0;
+  let lowest = Number.MAX_VALUE;
   for (let val of enumToNumberArray(enums)) {
     if (val < lowest) {
       lowest = val;
@@ -27,7 +27,7 @@ export function getLowestEnumValue(enums: Enums) {
 
 }
 export function getHighestEnumValue(enums: Enums) {
-  let highest = 0;
+  let highest = Number.MIN_VALUE;
   for (let val of enumToNumberArray(enums)) {
     if (val > highest) {
       highest = val;
