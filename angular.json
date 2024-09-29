@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Balatro": {
+    "BalatroClone": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/balatro",
+            "outputPath": "dist/balatro-clone",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Balatro:build:production"
+              "buildTarget": "BalatroClone:build:production"
             },
             "development": {
-              "buildTarget": "Balatro:build:development"
+              "buildTarget": "BalatroClone:build:development"
             }
           },
           "defaultConfiguration": "development"
