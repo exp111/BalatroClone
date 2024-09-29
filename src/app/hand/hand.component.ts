@@ -19,4 +19,12 @@ export class HandComponent {
   onCardClicked(card: Card) {
     this.Game.onCardClicked(card);
   }
+
+  onPlayClicked() {
+    this.Game.onPlayClicked();
+  }
+
+  onDiscardClicked() {
+    this.Game.onDiscardClicked();
+  }
 }
