@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Card, Suit, Value} from "../model/card";
-import {getHighestEnumValue} from "../enumUtils";
+import {getHighestEnumValue, getLowestEnumValue} from "../enumUtils";
 import {Hand} from "../model/hand";
 
 @Injectable({
@@ -30,8 +30,8 @@ export class GameService {
   }
 
   buildDeck() {
-    for (let suit = 0; suit < getHighestEnumValue(Suit); suit++) {
-      for (let value = 0; value < getHighestEnumValue(Value); value++) {
+    for (let suit = getLowestEnumValue(Suit); suit < getHighestEnumValue(Suit); suit++) {
+      for (let value = getLowestEnumValue(Value); value < getHighestEnumValue(Value); value++) {
         this.Deck.push(new Card(suit, value));
       }
     }

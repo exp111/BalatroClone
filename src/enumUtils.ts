@@ -16,6 +16,16 @@ export function enumToNumberArray(enums: Enums) {
   return Object.values(enums).filter(v => !Number.isNaN(Number(v))) as number[];
 }
 
+export function getLowestEnumValue(enums: Enums) {
+  let lowest = 0;
+  for (let val of enumToNumberArray(enums)) {
+    if (val < lowest) {
+      lowest = val;
+    }
+  }
+  return lowest;
+
+}
 export function getHighestEnumValue(enums: Enums) {
   let highest = 0;
   for (let val of enumToNumberArray(enums)) {
