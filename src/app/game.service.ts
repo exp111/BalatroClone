@@ -90,7 +90,8 @@ export class GameService {
       this.Discard.push(card);
     }
     this.score += score * mult;
-    this.Hand.forEach(c => c.selected = false);
+    this.Hand = this.Hand.filter(c => !toPlay.includes(c));
+    this.drawHand();
   }
 
   onDiscardClicked() {
