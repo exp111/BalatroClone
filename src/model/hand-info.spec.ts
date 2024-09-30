@@ -1,8 +1,6 @@
 import {HandInfo, HandType} from "./hand-info";
 import {Card, Suit, Value} from "./card";
 
-const HAND_SIZE = 5;
-
 describe('HandInfo', () => {
   beforeEach(() => {
   });
@@ -43,7 +41,7 @@ describe('HandInfo', () => {
     expect(info.Type).toBe(HandType.FullHouse);
     expect(info.ValidCards).toHaveSize(5);
   });
-  it('straight', () => {
+  it('four of a kind', () => {
     let info = new HandInfo(generateHandValues([Value.Two, Value.Two, Value.Two, Value.Two, Value.Three]));
     expect(info.Type).toBe(HandType.FourOfAKind);
     expect(info.ValidCards).toHaveSize(4);

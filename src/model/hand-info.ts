@@ -107,18 +107,24 @@ export class HandInfo {
       }
     }
     let hasStraight = (flush: boolean): Card[] | null => {
-      let count = 0;
-      let start = Value.Two;
-      for (let suit = Suit.Club; suit < (flush ? Suit.Heart : Suit.Diamond); suit++) {
+      // if we're looking for a flush, run all suits, else only 1
+      for (let suit = Suit.Club; suit < (flush ? Suit.Heart : Suit.Club + 1); suit++) {
+        let count = 0;
+        let start = Value.Two;
         for (let val = Value.Two; val < Value.Ace; val++) {
-          if ((flush && allAmount[suit][val] > 0) || (!flush && valueAmount[val] > 0)) {
+          // if we're in a straight, keep counting
+          if ((flush && allAmount[suit][val] > 0) // only accept flush if we're in the same suit
+            || (!flush && valueAmount[val] > 0)) {
             count++;
           } else {
+            // reset count + start
             start = val;
             count = 0;
           }
+          // check if we have a street
           if (count == 5) {
             let ret: Card[] = [];
+            // find all cards from start and add them to the list
             for (let i = start; i < start + 5; i++) {
               let card = this.AllCards.find(c => (!flush || c.suit == suit) && c.value == i);
               if (!card) {
