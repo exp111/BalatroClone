@@ -21,6 +21,7 @@ export class GameService {
   HAND_SIZE = 6;
   // max amount of cards one can play
   MAX_PLAY_SIZE = 5;
+  DECK_SIZE = 52;
 
   constructor() {
     (window as any).game = this;
@@ -30,8 +31,8 @@ export class GameService {
   }
 
   buildDeck() {
-    for (let suit = getLowestEnumValue(Suit); suit < getHighestEnumValue(Suit); suit++) {
-      for (let value = getLowestEnumValue(Value); value < getHighestEnumValue(Value); value++) {
+    for (let suit = getLowestEnumValue(Suit); suit <= getHighestEnumValue(Suit); suit++) {
+      for (let value = getLowestEnumValue(Value); value <= getHighestEnumValue(Value); value++) {
         this.Deck.push(new Card(suit, value));
       }
     }

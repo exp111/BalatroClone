@@ -8,4 +8,5 @@
 <div class="controls">
   <button [disabled]="!Game.canPlay()" (click)="onPlayClicked()">Play Hand ({{Game.PLAY_COUNT - Game.timesPlayed}})</button>
   <button [disabled]="!Game.canDiscard()" (click)="onDiscardClicked()">Discard ({{Game.DISCARD_COUNT - Game.timesDiscarded}})</button>
+  <p>Deck: {{this.Game.Deck.length}}/{{this.Game.DECK_SIZE}}</p>
 </div>
