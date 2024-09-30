@@ -108,7 +108,7 @@ export class HandInfo {
     }
     let hasStraight = (flush: boolean): Card[] | null => {
       let count = 0;
-      let start = 0;
+      let start = Value.Two;
       for (let suit = Suit.Club; suit < (flush ? Suit.Heart : Suit.Diamond); suit++) {
         for (let val = Value.Two; val < Value.Ace; val++) {
           if ((flush && allAmount[suit][val] > 0) || (!flush && valueAmount[val] > 0)) {
@@ -120,7 +120,7 @@ export class HandInfo {
           if (count == 5) {
             let ret: Card[] = [];
             for (let i = start; i < start + 5; i++) {
-              let card = this.AllCards.find(c => c.suit == suit && c.value == i);
+              let card = this.AllCards.find(c => (!flush || c.suit == suit) && c.value == i);
               if (!card) {
                 console.error(`could not find card with suit ${suit} and val ${i} for straight`);
                 return null;
