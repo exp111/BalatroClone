@@ -87,9 +87,9 @@ export class HandInfo {
       if (filtered.length > 0) {
         let highest = Number.MIN_VALUE;
         let highestCards: Card[] = [];
-        for (let suit of filtered.keys()) {
+        for (let [suit, _] of filtered) {
           let suitCards = this.AllCards
-            .filter(c => c.suit == suit)
+            .filter(c => c.suit == suit as unknown as number)
             .sort((a, b) => b.GetScore() - a.GetScore())
             .slice(0, c);
           let score = 0;
