@@ -64,7 +64,7 @@ export class HandInfo {
     }
     let getValueHandOfCount = (c: number, amount: number = 1) => {
       let filtered = Object.entries(valueAmount).filter(([k, v]) => v == c);
-      if (filtered.length > 0) {
+      if (filtered.length >= amount) {
         // sort by value, get the highest one
         let sortedValues = filtered.sort(([_a, a], [_b, b]) => b - a);
         let cards = [];
