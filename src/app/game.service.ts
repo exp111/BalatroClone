@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Card, Suit, Value} from "../model/card";
 import {getHighestEnumValue, getLowestEnumValue} from "../enumUtils";
-import {Hand} from "../model/hand";
+import {HandInfo} from "../model/hand-info";
 
 @Injectable({
   providedIn: 'root'
@@ -81,17 +81,20 @@ export class GameService {
     }
     this.timesPlayed++;
     let toPlay = this.Hand.filter(c => c.selected);
-    let handType = Hand.GetType(toPlay);
-    let score = Hand.GetScore(handType);
-    let mult = Hand.GetMult(handType);
-    for (let card of toPlay) {
-      //TODO: check if card is valid to score
+    // score hand
+    let handInfo = new HandInfo(toPlay);
+    let score = handInfo.Score;
+    for (let card of handInfo.ValidCards) {
       score += card.GetScore();
+    }
+    this.score += score * handInfo.Mult;
+    // discard all played cards
+    for (let card of toPlay) {
       card.selected = false;
       this.Discard.push(card);
     }
-    this.score += score * mult;
     this.Hand = this.Hand.filter(c => !toPlay.includes(c));
+    // redraw
     this.drawHand();
   }
 
