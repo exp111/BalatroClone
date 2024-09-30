@@ -11,6 +11,7 @@ export class GameService {
   Hand: Card[] = [];
   Discard: Card[] = [];
 
+  handInfo: HandInfo | null = null;
   score = 0;
   timesPlayed = 0;
   timesDiscarded= 0;
@@ -65,10 +66,11 @@ export class GameService {
         card.selected = true;
       }
     }
+    this.handInfo = new HandInfo(this.Hand.filter(c => c.selected));
   }
 
   canPlay() {
-    return this.Hand.some(h => h.selected) && this.timesPlayed < this.PLAY_COUNT;
+    return this.handInfo && this.timesPlayed < this.PLAY_COUNT;
   }
 
   canDiscard() {
@@ -80,20 +82,23 @@ export class GameService {
       return;
     }
     this.timesPlayed++;
-    let toPlay = this.Hand.filter(c => c.selected);
+    if (!this.handInfo) {
+      console.error("no handinfo?");
+      return;
+    }
     // score hand
-    let handInfo = new HandInfo(toPlay);
-    let score = handInfo.Score;
-    for (let card of handInfo.ValidCards) {
+    let score = this.handInfo.Score;
+    for (let card of this.handInfo.ValidCards) {
       score += card.GetScore();
     }
-    this.score += score * handInfo.Mult;
+    this.score += score * this.handInfo.Mult;
     // discard all played cards
-    for (let card of toPlay) {
+    for (let card of this.handInfo.AllCards) {
       card.selected = false;
       this.Discard.push(card);
     }
-    this.Hand = this.Hand.filter(c => !toPlay.includes(c));
+    this.Hand = this.Hand.filter(c => !this.handInfo!.AllCards.includes(c));
+    this.handInfo = null;
     // redraw
     this.drawHand();
   }
@@ -111,6 +116,7 @@ export class GameService {
     }
     // keep in hand those which werent discarded
     this.Hand = this.Hand.filter(c => !toDiscard.includes(c));
+    this.handInfo = null;
     this.drawHand();
   }
 }
